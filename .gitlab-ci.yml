@@ -10,5 +10,7 @@ deploy_staging:
     - sudo npm run create-links
     - npm run build-docs
     - sudo rsync -azr --delete --exclude .git/ --exclude-from .rsyncignore $CI_PROJECT_DIR $TARGET_DIR
+    - sudo chown -R www-data $TARGET_DIR/$CI_PROJECT_NAME
+    - sudo chgrp -R www-data $TARGET_DIR/$CI_PROJECT_NAME
   only:
     - live
