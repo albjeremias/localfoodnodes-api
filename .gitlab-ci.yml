@@ -1,0 +1,13 @@
+variables:
+  TARGET_DIR: /var/www
+
+deploy_staging:
+  stage: deploy
+  tags:
+    - live
+  script:
+    - npm install
+    - npm run build-docs
+    - sudo rsync -azr --delete --exclude .git/ --exclude-from .rsyncignore $CI_PROJECT_DIR $TARGET_DIR
+  only:
+    - live
