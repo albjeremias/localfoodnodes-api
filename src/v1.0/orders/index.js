@@ -27,7 +27,7 @@ var router = express.Router();
  *   }
  * }
  */
-router.get('/orders/count', (req, res) => {
+router.get('/count', (req, res) => {
   orders.count()
   .then(data => {
     res.send(data);
@@ -67,7 +67,7 @@ router.get('/orders/count', (req, res) => {
  *   }
  * }
  */
-router.get('/orders/count/date', (req, res) => {
+router.get('/count/date', (req, res) => {
   orders.countPerDate()
   .then(data => {
     res.send(data);
@@ -101,7 +101,7 @@ router.get('/orders/count/date', (req, res) => {
  *   }
  * }
  */
-router.get('/orders/amount', (req, res) => {
+router.get('/amount', (req, res) => {
   orders.amount()
   .then(data => {
     res.send(data);
@@ -141,7 +141,7 @@ router.get('/orders/amount', (req, res) => {
  *   }
  * }
  */
-router.get('/orders/amount/date', (req, res) => {
+router.get('/amount/date', (req, res) => {
   orders.amountPerDate()
   .then(data => {
     res.send(data);
