@@ -11,7 +11,6 @@ app.get('/', (req, res) => {
 // Api documentation
 app.use('/v1.0', express.static(__dirname + '/public'));
 
-
 // Api endpoints
 app.use('/v1.0', v1_0);
 
