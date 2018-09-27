@@ -12,6 +12,7 @@ deploy_staging:
     - sudo rsync -azr --delete --exclude .git/ --exclude-from .rsyncignore $CI_PROJECT_DIR $TARGET_DIR
     - sudo chown -R www-data $TARGET_DIR/$CI_PROJECT_NAME
     - sudo chgrp -R www-data $TARGET_DIR/$CI_PROJECT_NAME
-    - sudo pm2 restart $TARGET_DIR/$CI_PROJECT_NAME/index.js --interpreter $TARGET_DIR/$CI_PROJECT_NAME/node_modules/.bin/babel-node -n api
+    - sudo pm2 start $TARGET_DIR/$CI_PROJECT_NAME/index.js --interpreter $TARGET_DIR/$CI_PROJECT_NAME/node_modules/.bin/babel-node -n api
+    - sudo pm2 update
   only:
     - live
