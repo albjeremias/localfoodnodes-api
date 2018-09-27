@@ -17,14 +17,14 @@ module.exports = {
     }
   }],
 
-  deploy : {
-    production : {
-      user : 'node',
-      host : '127.0.0.1',
-      ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
-      path : '/var/www/localfoodnodes-api',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+  deploy: {
+    production: {
+      user: 'root',
+      host: '127.0.0.1',
+      ref: 'origin/master',
+      repo: 'git@gitlab.com:localfoodnodes/localfoodnodes-api.git',
+      path: '/var/www/localfoodnodes-api',
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production'
     }
   }
 };
