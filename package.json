@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
     "create-links": "npm link src/db",
-    "build-docs": "apidoc -i src/ -o public/ -t template/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require babel-core/register",
+    "build-docs": "apidoc -i src/ -o public/ -t template/"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.4"
   }
 }

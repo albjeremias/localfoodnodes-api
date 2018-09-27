@@ -33,7 +33,7 @@ router.get('/count', (req, res) => {
     res.send(data);
   })
   .catch(error => {
-    res.status(404).send(error);
+    res.status(500).send(error);
   });
 });
 
@@ -73,7 +73,7 @@ router.get('/count/date', (req, res) => {
     res.send(data);
   })
   .catch(error => {
-    res.status(404).send(error);
+    res.status(500).send(error);
   });
 });
 
@@ -107,7 +107,7 @@ router.get('/amount', (req, res) => {
     res.send(data);
   })
   .catch(error => {
-    res.status(404).send(error);
+    res.status(500).send(error);
   });
 });
 
@@ -124,7 +124,7 @@ router.get('/amount', (req, res) => {
  * {
  *   "data": {
  *     "2017-05-25": 12,
-*      "2017-05-26": 37,
+ *     "2017-05-26": 37,
  *     "2017-05-27": 16,
  *     "2017-05-28": 21,
  *     ...
@@ -147,7 +147,7 @@ router.get('/amount/date', (req, res) => {
     res.send(data);
   })
   .catch(error => {
-    res.status(404).send(error);
+    res.status(500).send(error);
   });
 });
 

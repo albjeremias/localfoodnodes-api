@@ -8,11 +8,15 @@ export default {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['users_count'], (error, results, fields) => {
         if (error) {
-          reject(error);
+          return reject(db.formatJsonError(error));
         }
 
-        if (results.length < 1) {
-          return reject('Fel');
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
         }
 
         let data = results[0];

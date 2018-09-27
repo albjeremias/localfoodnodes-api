@@ -8,11 +8,15 @@ export default {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count_total'], (error, results, fields) => {
         if (error) {
-          reject(error);
+          return reject(db.formatJsonError(error));
         }
 
-        if (results.length < 1) {
-          return reject('Fel');
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
         }
 
         let data = results[0];
@@ -28,11 +32,15 @@ export default {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count_per_date'], (error, results, fields) => {
         if (error) {
-          reject(error);
+          return reject(db.formatJsonError(error));
         }
 
-        if (results.length < 1) {
-          return reject('Fel');
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
         }
 
         let data = {
@@ -51,11 +59,15 @@ export default {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount_total'], (error, results, fields) => {
         if (error) {
-          reject(error);
+          return reject(db.formatJsonError(error));
         }
 
-        if (results.length < 1) {
-          return reject('Fel');
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
         }
 
         let data = results[0];
@@ -71,13 +83,16 @@ export default {
   amountPerDate() {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount_per_date'], (error, results, fields) => {
-        console.log(error);
         if (error) {
-          reject(error);
+          return reject(db.formatJsonError(error));
         }
 
-        if (results.length < 1) {
-          return reject('Fel');
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
         }
 
         let data = {
