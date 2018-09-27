@@ -14,4 +14,14 @@ connection.connect((error) => {
   }
 });
 
+connection.formatJsonError = function(error) {
+  return {
+    error: {
+      code: error.code,
+      errno: error.errno,
+      message: error.sqlMessage,
+    }
+  };
+};
+
 module.exports = connection;

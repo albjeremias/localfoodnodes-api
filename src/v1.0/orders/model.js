@@ -2,9 +2,9 @@ import db from 'db';
 
 export default {
   /**
-   * Get total order count
+   * Get total number of orders
    */
-  countTotal() {
+  count() {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count_total'], (error, results, fields) => {
         if (error) {
@@ -47,7 +47,7 @@ export default {
   /**
    * Get order amount total in euro
    */
-  amountTotal() {
+  amount() {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount_total'], (error, results, fields) => {
         if (error) {

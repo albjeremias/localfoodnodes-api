@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="vendor/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/style.css" rel="stylesheet" media="screen, print">
-  <link href="img/favicon.ico" rel="icon" type="image/x-icon">
+  <link href="img/favicon.png" rel="icon" type="image/x-icon">
   <script src="vendor/polyfill.js"></script>
 </head>
 <body>
@@ -60,8 +60,8 @@
 <script id="template-generator" type="text/x-handlebars-template">
   {{#if template.withGenerator}}
     {{#if generator}}
-      <div class="content">
-        {{__ "Generated with"}} <a href="{{{generator.url}}}">{{{generator.name}}}</a> {{{generator.version}}} - {{{generator.time}}}
+      <div class="content pull-right">
+        {{__ "Generated with"}} {{{generator.name}}} {{{generator.version}}} - {{{generator.time}}}
       </div>
     {{/if}}
   {{/if}}
@@ -69,7 +69,7 @@
 
 <script id="template-sections" type="text/x-handlebars-template">
   <section id="api-{{group}}">
-    <h1>{{underscoreToSpace title}}</h1>
+    <h2>{{underscoreToSpace title}}</h2>
     {{#if description}}
       <p>{{{nl2br description}}}</p>
     {{/if}}
@@ -84,7 +84,7 @@
 <script id="template-article" type="text/x-handlebars-template">
   <article id="api-{{article.group}}-{{article.name}}-{{article.version}}" {{#if hidden}}class="hide"{{/if}} data-group="{{article.group}}" data-name="{{article.name}}" data-version="{{article.version}}">
     <div class="pull-left">
-      <h2>{{article.groupTitle}}{{#if article.title}} - {{article.title}}{{/if}}</h2>
+      <h3>{{article.groupTitle}}{{#if article.title}} - {{article.title}}{{/if}}</h3>
     </div>
     <div class="clearfix"></div>
 
@@ -145,7 +145,7 @@
 <script id="template-article-param-block" type="text/x-handlebars-template">
   {{#if params}}
     {{#each params.fields}}
-      <h3>{{__ @key}}</h3>
+      <h4>{{__ @key}}</h4>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>

@@ -1,9 +1,16 @@
-/* ------------------------------------------------------------------------------------------
+/*
  * Content
- * ------------------------------------------------------------------------------------------ */
+ */
 body {
   min-width: 980px;
   max-width: 1280px;
+  background-color:#fafafa;
+  background-image: linear-gradient(#f0f0f0 1px, transparent 1px),
+  linear-gradient(90deg, #f0f0f0 1px, transparent 1px),
+  linear-gradient(#f0f0f0 1px, transparent 1px),
+  linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
+  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
 }
 
 #content {
@@ -12,18 +19,13 @@ body {
   margin-left: 270px;
 }
 
-section h1 {
-  display: inline-block;
-  border-bottom: 5px solid #333;
-}
-
 pre {
   display: flex;
 }
 
-/* ------------------------------------------------------------------------------------------
+/*
  * Sidenav
- * ------------------------------------------------------------------------------------------ */
+ */
 .sidenav {
   width: 228px;
   margin: 0;
@@ -80,9 +82,9 @@ pre {
   border-left: #e5e5e5 4px solid;
 }
 
-/* ------------------------------------------------------------------------------------------
+/*
  * Side nav search
- * ------------------------------------------------------------------------------------------ */
+ */
 .sidenav-search {
   width: 228px;
   left: 0px;
@@ -96,13 +98,32 @@ pre {
   border: 0;
 }
 
+/*
+ * Section
+ */
+section h2 {
+  margin: 5rem 0 2rem;
+}
+
+/*
+ * Article
+ */
 article {
+  background: #fff;
   border-bottom: 1px solid #eee;
   margin-bottom: 3rem;
   padding-bottom: 6rem;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px #ccc;
 }
 
 article h3 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+article h4 {
   margin-top: 4rem;
 }
 
@@ -120,10 +141,9 @@ article .table p {
   margin: 0;
 }
 
-/* ------------------------------------------------------------------------------------------
+/*
  * Spinner
- * ------------------------------------------------------------------------------------------ */
-
+ */
  #loader {
   position: absolute;
   width: 100%;
