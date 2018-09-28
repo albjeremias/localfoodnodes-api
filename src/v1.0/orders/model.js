@@ -6,7 +6,7 @@ export default {
    */
   count() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count_total'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -57,7 +57,7 @@ export default {
    */
   amount() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount_total'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }

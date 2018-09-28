@@ -33,6 +33,7 @@ router.get('/count', (req, res) => {
     res.send(data);
   })
   .catch(error => {
+    console.error(error);
     res.status(500).send(error);
   });
 });

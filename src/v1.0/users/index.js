@@ -4,7 +4,7 @@ import users from './model';
 var router = express.Router();
 
 /**
- * @api {get} /users/count Number of producers
+ * @api {get} /users/count Number of users
  * @apiName Count
  * @apiGroup Users
  * @apiVersion 1.0.0
@@ -33,6 +33,7 @@ router.get('/count', (req, res) => {
     res.send(data);
   })
   .catch(error => {
+    console.error(error);
     res.status(500).send(error);
   });
 });

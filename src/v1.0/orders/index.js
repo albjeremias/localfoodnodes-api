@@ -33,6 +33,7 @@ router.get('/count', (req, res) => {
     res.send(data);
   })
   .catch(error => {
+    console.error(error);
     res.status(500).send(error);
   });
 });
@@ -73,6 +74,7 @@ router.get('/count/date', (req, res) => {
     res.send(data);
   })
   .catch(error => {
+    console.error(error);
     res.status(500).send(error);
   });
 });
@@ -107,6 +109,7 @@ router.get('/amount', (req, res) => {
     res.send(data);
   })
   .catch(error => {
+    console.error(error);
     res.status(500).send(error);
   });
 });
@@ -147,6 +150,7 @@ router.get('/amount/date', (req, res) => {
     res.send(data);
   })
   .catch(error => {
+    console.error(error);
     res.status(500).send(error);
   });
 });
