@@ -41,15 +41,23 @@ describe('Test api routes', function () {
   }
 
   it(apiUrl + '/nodes/3/amount should return 200', function (done) {
-    http.get(apiUrl + '/', function (res) {
+    http.get(apiUrl + '/nodes/3/amount', function (res) {
       assert.equal(200, res.statusCode);
       that.countNumberOrRunTests++;
       done();
     });
   });
 
-  it(apiUrl + '/v.1.0/nodes/3/count should return 200', function (done) {
-    http.get(apiUrl + '/', function (res) {
+  it(apiUrl + '/nodes/3/count should return 200', function (done) {
+    http.get(apiUrl + '/nodes/3/count', function (res) {
+      assert.equal(200, res.statusCode);
+      that.countNumberOrRunTests++;
+      done();
+    });
+  });
+
+  it(apiUrl + '/nodes/3/members should return 200', function (done) {
+    http.get(apiUrl + '/nodes/3/members', function (res) {
       assert.equal(200, res.statusCode);
       that.countNumberOrRunTests++;
       done();

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
     "create-links": "npm link src/db && npm link src/currency-converter",
-    "test": "mocha --require babel-core/register",
+    "test": "apidoc -i src/ -o public/ -t template/ && mocha --require babel-core/register",
     "build-docs": "apidoc -i src/ -o public/ -t template/"
   },
   "repository": {
