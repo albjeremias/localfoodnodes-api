@@ -5,18 +5,12 @@ body {
   min-width: 980px;
   max-width: 1280px;
   background-color:#fafafa;
-  background-image: linear-gradient(#f0f0f0 1px, transparent 1px),
-  linear-gradient(90deg, #f0f0f0 1px, transparent 1px),
-  linear-gradient(#f0f0f0 1px, transparent 1px),
-  linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
-  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
-  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
 }
 
 #content {
-  padding-top: 16px;
-  z-Index: -1;
-  margin-left: 270px;
+  padding-top: 15px;
+  margin-left: calc(30vw + 15px);
+  width: calc(70vw - 30px);
 }
 
 pre {
@@ -27,7 +21,7 @@ pre {
  * Sidenav
  */
 .sidenav {
-  width: 228px;
+  width: 30vw;
   margin: 0;
   position: fixed;
   top: 60px;
@@ -42,7 +36,6 @@ pre {
 .sidenav > li > a {
   color: #fff;
   display: block;
-  width: 192px;
   margin: 0;
   padding: 2px 11px;
   border: 0;
@@ -55,6 +48,7 @@ pre {
 .sidenav > li > a:hover {
   background: transparent;
   color: #ccc;
+  text-decoration: underline;
 }
 
 .sidenav > li.nav-header {
@@ -72,6 +66,7 @@ pre {
     position: relative;
     z-index: 2;
     color: #ccc;
+    text-decoration: underline;
 }
 
 .sidenav > li.has-modifications a {
@@ -86,7 +81,7 @@ pre {
  * Side nav search
  */
 .sidenav-search {
-  width: 228px;
+  width: 30vw;
   left: 0px;
   position: fixed;
   padding: 15px;

@@ -4,12 +4,12 @@ import orders from './model';
 var router = express.Router();
 
 /**
- * @api {get} /orders/count Number of orders
- * @apiName Count
+ * @api {get} /orders/count 3. Order product count
+ * @apiName Order product count
  * @apiGroup Orders
  * @apiVersion 1.0.0
  *
- * @apiSuccess {Array} data Order amount in euro grouped by dates.
+ * @apiSuccess {Array} data Total order product count.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -39,12 +39,12 @@ router.get('/count', (req, res) => {
 });
 
 /**
- * @api {get} /orders/count/date Count per date
- * @apiName Count per date
+ * @api {get} /orders/count/date 4. Order product count per date
+ * @apiName Order product count per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
  *
- * @apiSuccess {Array} data Order amount in euro grouped by dates.
+ * @apiSuccess {Array} data Total order product count grouped by date.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -80,8 +80,8 @@ router.get('/count/date', (req, res) => {
 });
 
 /**
- * @api {get} /orders/amount Amount total
- * @apiName Amount total
+ * @api {get} /orders/amount 1. Order amount
+ * @apiName Order amount
  * @apiGroup Orders
  * @apiVersion 1.0.0
  *
@@ -115,12 +115,12 @@ router.get('/amount', (req, res) => {
 });
 
 /**
- * @api {get} /orders/amount/date Amount per date
- * @apiName Amount per date
+ * @api {get} /orders/amount/date 2. Order amount per date
+ * @apiName Order amount per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
  *
- * @apiSuccess {Array} data Order amount in euro grouped by dates.
+ * @apiSuccess {Array} data Order amount in euro grouped by date.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK

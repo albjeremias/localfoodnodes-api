@@ -4,7 +4,7 @@ import nodes from './model';
 var router = express.Router();
 
 /**
- * @api {get} /nodes/count Number of nodes
+ * @api {get} /nodes/count 1. Number of nodes
  * @apiName Count
  * @apiGroup Nodes
  * @apiVersion 1.0.0
@@ -38,7 +38,7 @@ router.get('/count', (req, res) => {
 });
 
 /**
- * @api {get} /nodes/:nodeId/amount Order amount for a node
+ * @api {get} /nodes/:nodeId/amount 3. Order amount for a node
  * @apiName Order amount for a node
  * @apiGroup Nodes
  * @apiVersion 1.0.0
@@ -76,7 +76,7 @@ router.get(['/:nodeId/amount', '/amount'], (req, res) => {
 });
 
 /**
- * @api {get} /nodes/:nodeId/count Order count for a node
+ * @api {get} /nodes/:nodeId/count 2. Order count for a node
  * @apiName Order count for a node
  * @apiGroup Nodes
  * @apiVersion 1.0.0

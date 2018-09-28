@@ -1,23 +1,24 @@
+import 'dotenv/config';
 import assert from 'assert';
 import http from 'http';
 import data from '../public/api_data.json';
 
 describe('Test api routes', function () {
-  const apiUrl = 'http://localhost:3000/v1.0';
+  const apiUrl = process.env.APP_URL + '/v1.0';
   const numberOfTests = data.length + 2;
 
   let that = this;
   that.countNumberOrRunTests = 0;
 
-  it('http://localhost:3000 should return 302', function (done) {
-    http.get('http://localhost:3000', function (res) {
+  it(process.env.APP_URL + '/ should return 302', function (done) {
+    http.get(process.env.APP_URL + '/', function (res) {
       assert.equal(302, res.statusCode);
       that.countNumberOrRunTests++;
       done();
     });
   });
 
-  it('http://localhost:3000/v.1.0/ should return 200', function (done) {
+  it(apiUrl + '/ should return 200', function (done) {
     http.get(apiUrl + '/', function (res) {
       assert.equal(200, res.statusCode);
       that.countNumberOrRunTests++;
@@ -39,7 +40,7 @@ describe('Test api routes', function () {
     }
   }
 
-  it('http://localhost:3000/v.1.0/nodes/3/amount should return 200', function (done) {
+  it(apiUrl + '/nodes/3/amount should return 200', function (done) {
     http.get(apiUrl + '/', function (res) {
       assert.equal(200, res.statusCode);
       that.countNumberOrRunTests++;
@@ -47,7 +48,7 @@ describe('Test api routes', function () {
     });
   });
 
-  it('http://localhost:3000/v.1.0/nodes/3/count should return 200', function (done) {
+  it(apiUrl + '/v.1.0/nodes/3/count should return 200', function (done) {
     http.get(apiUrl + '/', function (res) {
       assert.equal(200, res.statusCode);
       that.countNumberOrRunTests++;

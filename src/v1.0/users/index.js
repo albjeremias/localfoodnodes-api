@@ -4,7 +4,7 @@ import users from './model';
 var router = express.Router();
 
 /**
- * @api {get} /users/count Number of users
+ * @api {get} /users/count 1. Number of users
  * @apiName Count
  * @apiGroup Users
  * @apiVersion 1.0.0

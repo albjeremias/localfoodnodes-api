@@ -4,7 +4,7 @@ import producers from './model';
 var router = express.Router();
 
 /**
- * @api {get} /producers/count Number of producers
+ * @api {get} /producers/count 1. Number of producers
  * @apiName Count
  * @apiGroup Producers
  * @apiVersion 1.0.0
