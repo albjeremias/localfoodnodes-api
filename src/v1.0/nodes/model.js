@@ -168,5 +168,49 @@ export default {
         });
       });
     });
-  }, // End count per node
+  }, // End number of members
+
+  /**
+   * Unique customers per node
+   */
+  uniqueCustomersPerNode(nodeId) {
+    return new Promise(function(resolve, reject) {
+
+      if (!nodeId) {
+        return reject({
+          error: {
+            message: 'Missing parameter.'
+          }
+        });
+      }
+
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['nodes_unique_customers_per_node'], (error, results, fields) => {
+        if (error) {
+          return reject(db.formatJsonError(error));
+        }
+
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
+        }
+
+        results = JSON.parse(results[0].data);
+
+        if (!results[nodeId]) {
+          return reject({
+            error: {
+              message: 'No data for node.'
+            }
+          });
+        }
+
+        return resolve({
+          data: results[nodeId]
+        });
+      });
+    });
+  }, // End unique customers
 }

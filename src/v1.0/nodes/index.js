@@ -38,7 +38,7 @@ router.get('/count', (req, res) => {
 });
 
 /**
- * @api {get} /nodes/:nodeId/amount 3. Order amount per node
+ * @api {get} /nodes/:nodeId/amount 4. Order amount per node
  * @apiName Order amount per node
  * @apiGroup Nodes
  * @apiVersion 1.0.0
@@ -76,7 +76,7 @@ router.get(['/:nodeId/amount'], (req, res) => {
 });
 
 /**
- * @api {get} /nodes/:nodeId/count 2. Order product count per node
+ * @api {get} /nodes/:nodeId/count 3. Order product count per node
  * @apiName Order product count per node
  * @apiGroup Nodes
  * @apiVersion 1.0.0
@@ -114,7 +114,7 @@ router.get(['/:nodeId/count'], (req, res) => {
 });
 
 /**
- * @api {get} /nodes/:nodeId/members 3. Number of members per node
+ * @api {get} /nodes/:nodeId/members 2. Number of members per node
  * @apiName Number of members per node
  * @apiGroup Nodes
  * @apiVersion 1.0.0
@@ -141,6 +141,43 @@ router.get(['/:nodeId/count'], (req, res) => {
  */
 router.get(['/:nodeId/members'], (req, res) => {
   nodes.membersPerNode(req.params.nodeId)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+/**
+ * @api {get} /nodes/:nodeId/customers 5. Number of unique customers per node
+ * @apiName Number of unique customers per node
+ * @apiGroup Nodes
+ * @apiVersion 1.0.0
+ *
+ * @apiParam {Int} nodeId The nodes id
+ *
+ * @apiSuccess {Object} data Number of unique customers.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": "45"
+ * }
+ *
+ * @apiError (Error 500) {Object} ServerError
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 500 ServerError
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get(['/:nodeId/customers'], (req, res) => {
+  nodes.uniqueCustomersPerNode(req.params.nodeId)
   .then(data => {
     res.send(data);
   })

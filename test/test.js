@@ -64,6 +64,14 @@ describe('Test api routes', function () {
     });
   });
 
+  it(apiUrl + '/nodes/3/customers should return 200', function (done) {
+    http.get(apiUrl + '/nodes/3/customers', function (res) {
+      assert.equal(200, res.statusCode);
+      that.countNumberOrRunTests++;
+      done();
+    });
+  });
+
   it('All tests have run', function (done) {
     assert.equal(numberOfTests, that.countNumberOrRunTests);
     done();
