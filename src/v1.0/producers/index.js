@@ -8,6 +8,7 @@ var router = express.Router();
  * @apiName Count
  * @apiGroup Producers
  * @apiVersion 1.0.0
+ * @apiDescription Get the number of producers registered on localfoodnodes.org.
  *
  * @apiSuccess {Object} data Number of nodes.
  *
@@ -17,10 +18,10 @@ var router = express.Router();
  *   "data": "241"
  * }
  *
- * @apiError (Error 500) {Object} ServerError
+ * @apiError {Object} error Object containing error message.
  *
  * @apiErrorExample Error-Response:
- * HTTP/1.1 500 ServerError
+ * HTTP/1.1 400 Bad Request
  * {
  *   "error": {
  *     message: "A message describing the error."

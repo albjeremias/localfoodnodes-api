@@ -85,95 +85,63 @@ export default {
   /**
    * Order count for a specific node
    */
-  countPerNode(nodeId) {
-    return new Promise(function(resolve, reject) {
-
-      if (!nodeId) {
-        return reject({
-          error: {
-            message: 'Missing parameter.'
-          }
-        });
-      }
-
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count_per_node'], (error, results, fields) => {
-        if (error) {
-          return reject(db.formatJsonError(error));
-        }
-
-        if (!results || results.length < 1) {
-          return reject({
-            error: {
-              message: 'No data.'
-            }
-          });
-        }
-
-        results = JSON.parse(results[0].data);
-
-        if (!results[nodeId]) {
-          return reject({
-            error: {
-              message: 'No data for node.'
-            }
-          });
-        }
-
-        return resolve({
-          data: results[nodeId]
-        });
-      });
-    });
-  }, // End count per node
+  ordersPerNode(nodeId) {
+    return this.entityPerNode('orders_count_per_node', nodeId);
+  },
 
   /**
    * Number of members for a specific node
    */
   membersPerNode(nodeId) {
-    return new Promise(function(resolve, reject) {
-
-      if (!nodeId) {
-        return reject({
-          error: {
-            message: 'Missing parameter.'
-          }
-        });
-      }
-
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['nodes_members_per_node'], (error, results, fields) => {
-        if (error) {
-          return reject(db.formatJsonError(error));
-        }
-
-        if (!results || results.length < 1) {
-          return reject({
-            error: {
-              message: 'No data.'
-            }
-          });
-        }
-
-        results = JSON.parse(results[0].data);
-
-        if (!results[nodeId]) {
-          return reject({
-            error: {
-              message: 'No data for node.'
-            }
-          });
-        }
-
-        return resolve({
-          data: results[nodeId]
-        });
-      });
-    });
-  }, // End number of members
+    return this.entityPerNode('nodes_members_per_node', nodeId);
+  },
 
   /**
-   * Unique customers per node
+   * Customers per node
    */
-  uniqueCustomersPerNode(nodeId) {
+  customersPerNode(nodeId) {
+    return this.entityPerNode('nodes_customers_per_node', nodeId);
+  },
+
+  /**
+   * Customers per node and date
+   */
+  customersPerNodeAndDate(nodeId, date) {
+    return this.entityPerNodeAndDate('nodes_customers_per_node_and_date', nodeId, date);
+  },
+
+  /**
+   * Producers per node
+   */
+  producersPerNode(nodeId) {
+    return this.entityPerNode('nodes_producers_per_node', nodeId);
+  },
+
+  /**
+   * Customers per node and date
+   */
+  producersPerNodeAndDate(nodeId, date) {
+    return this.entityPerNodeAndDate('nodes_producers_per_node_and_date', nodeId, date);
+  },
+
+  /**
+   * Producers per node
+   */
+  productsPerNode(nodeId) {
+    return this.entityPerNode('nodes_products_per_node', nodeId);
+  },
+
+  /**
+   * Products per node and date
+   */
+  productsPerNodeAndDate(nodeId, date) {
+    return this.entityPerNodeAndDate('nodes_products_per_node_and_date', nodeId, date);
+  },
+
+  /**
+   * Entity per node
+   */
+  entityPerNode(key, nodeId) {
     return new Promise(function(resolve, reject) {
 
       if (!nodeId) {
@@ -184,7 +152,7 @@ export default {
         });
       }
 
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['nodes_unique_customers_per_node'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -202,7 +170,7 @@ export default {
         if (!results[nodeId]) {
           return reject({
             error: {
-              message: 'No data for node.'
+              message: 'No data for provided node id.'
             }
           });
         }
@@ -212,5 +180,56 @@ export default {
         });
       });
     });
-  }, // End unique customers
+  },
+
+  /**
+   * Entity per node and date
+   */
+  entityPerNodeAndDate(key, nodeId, date) {
+    return new Promise(function(resolve, reject) {
+      if (!date) {
+        return reject({
+          error: {
+            message: 'Missing date parameter.'
+          }
+        });
+      }
+
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key], (error, results, fields) => {
+        if (error) {
+          return reject(db.formatJsonError(error));
+        }
+
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
+        }
+
+        results = JSON.parse(results[0].data);
+
+        if (!results[nodeId]) {
+          return reject({
+            error: {
+              message: 'No data for provided node id.'
+            }
+          });
+        }
+
+        if (!results[nodeId][date]) {
+          return reject({
+            error: {
+              message: 'No data for provided date.'
+            }
+          });
+        }
+
+        return resolve({
+          data: results[nodeId][date]
+        });
+      });
+    });
+  },
 }

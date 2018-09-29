@@ -4,10 +4,11 @@ import orders from './model';
 var router = express.Router();
 
 /**
- * @api {get} /orders/count 3. Order product count
- * @apiName Order product count
+ * @api {get} /orders/count 3. Number of orders
+ * @apiName Total number of orders
  * @apiGroup Orders
  * @apiVersion 1.0.0
+ * @apiDescription Get the total number of orders.
  *
  * @apiSuccess {Array} data Total order product count.
  *
@@ -17,10 +18,10 @@ var router = express.Router();
  *   "data": "3248"
  * }
  *
- * @apiError (Error 500) {Object} ServerError
+ * @apiError {Object} error Object containing error message.
  *
  * @apiErrorExample Error-Response:
- * HTTP/1.1 500 ServerError
+ * HTTP/1.1 400 Bad Request
  * {
  *   "error": {
  *     message: "A message describing the error."
@@ -39,10 +40,11 @@ router.get('/count', (req, res) => {
 });
 
 /**
- * @api {get} /orders/count/date 4. Order product count per date
- * @apiName Order product count per date
+ * @api {get} /orders/count/date 4. Number of ordersper date
+ * @apiName Total number of orders per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
+ * @apiDescription Get the total number of orders grouped per date.
  *
  * @apiSuccess {Array} data Total order product count grouped by date.
  *
@@ -58,10 +60,10 @@ router.get('/count', (req, res) => {
  *   }
  * }
  *
- * @apiError (Error 500) {Object} ServerError
+ * @apiError {Object} error Object containing error message.
  *
  * @apiErrorExample Error-Response:
- * HTTP/1.1 500 ServerError
+ * HTTP/1.1 400 Bad Request
  * {
  *   "error": {
  *     message: "A message describing the error."
@@ -81,11 +83,14 @@ router.get('/count/date', (req, res) => {
 
 /**
  * @api {get} /orders/amount 1. Order amount
- * @apiName Order amount
+ * @apiName Total order amount
  * @apiGroup Orders
  * @apiVersion 1.0.0
+ * @apiDescription Get the total order amount.
  *
- * @apiSuccess {Int} data Total order amount in euro.
+ * @apiParam {String} currency Currency code to convert amount
+ *
+ * @apiSuccess {Int} data Amount in EUR if no other currency is specified.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -93,10 +98,10 @@ router.get('/count/date', (req, res) => {
  *   "data": "32354.00888051546"
  * }
  *
- * @apiError (Error 500) {Object} ServerError
+ * @apiError {Object} error Object containing error message.
  *
  * @apiErrorExample Error-Response:
- * HTTP/1.1 500 ServerError
+ * HTTP/1.1 400 Bad Request
  * {
  *   "error": {
  *     message: "A message describing the error."
@@ -104,7 +109,7 @@ router.get('/count/date', (req, res) => {
  * }
  */
 router.get('/amount', (req, res) => {
-  orders.amount()
+  orders.amount(req.query)
   .then(data => {
     res.send(data);
   })
@@ -119,8 +124,9 @@ router.get('/amount', (req, res) => {
  * @apiName Order amount per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
+ * @apiDescription Get the total order amount grouped by date.
  *
- * @apiSuccess {Array} data Order amount in euro grouped by date.
+ * @apiSuccess {Array} data Amount in EUR if no other currency is specified, grouped by date.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -134,10 +140,10 @@ router.get('/amount', (req, res) => {
  *   }
  * }
  *
- * @apiError (Error 500) {Object} ServerError
+ * @apiError {Object} error Object containing error message.
  *
  * @apiErrorExample Error-Response:
- * HTTP/1.1 500 ServerError
+ * HTTP/1.1 400 Bad Request
  * {
  *   "error": {
  *     message: "A message describing the error."
@@ -145,7 +151,7 @@ router.get('/amount', (req, res) => {
  * }
  */
 router.get('/amount/date', (req, res) => {
-  orders.amountPerDate()
+  orders.amountPerDate(req.query)
   .then(data => {
     res.send(data);
   })

@@ -1,4 +1,5 @@
 import db from 'db';
+import currencyConverter from 'currency-converter';
 
 export default {
   /**
@@ -55,7 +56,7 @@ export default {
   /**
    * Get order amount total in euro
    */
-  amount() {
+  amount(query) {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount'], (error, results, fields) => {
         if (error) {
@@ -70,9 +71,21 @@ export default {
           });
         }
 
-        let data = results[0];
+        let amount = results[0].data;
 
-        return resolve(data);
+        // Convert to currency
+        if (query.currency) {
+          currencyConverter.convert(amount, query.currency)
+          .then(amount => {
+            return resolve({
+              data: amount
+            })
+          });
+        } else {
+          return resolve({
+            data: amount
+          });
+        }
       });
     });
   },
@@ -80,7 +93,7 @@ export default {
   /**
    * Get order amount per date in euro
    */
-  amountPerDate() {
+  amountPerDate(query) {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount_per_date'], (error, results, fields) => {
         if (error) {
@@ -95,9 +108,25 @@ export default {
           });
         }
 
+        // Todo: loop and convert currency?
+
         let data = {
           data: JSON.parse(results[0].data)
         };
+
+        // Convert to currency
+        // if (query.currency) {
+        //   currencyConverter.convert(amount, query.currency)
+        //   .then(amount => {
+        //     return resolve({
+        //       data: amount
+        //     })
+        //   });
+        // } else {
+        //   return resolve({
+        //     data: amount
+        //   });
+        // }
 
         return resolve(data);
       });

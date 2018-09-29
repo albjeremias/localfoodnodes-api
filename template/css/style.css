@@ -17,6 +17,11 @@ pre {
   display: flex;
 }
 
+.description {
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
 /*
  * Sidenav
  */
@@ -52,8 +57,7 @@ pre {
 }
 
 .sidenav > li.nav-header {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 30px;
 }
 
 .sidenav > li.nav-header > a {

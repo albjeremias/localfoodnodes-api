@@ -40,7 +40,9 @@
 <script id="template-project" type="text/x-handlebars-template">
   <div class="pull-left">
     <h1>{{name}}</h1>
-    {{#if description}}<p>{{{nl2br description}}}</p>{{/if}}
+    {{#if description}}
+      <div class="description">{{{nl2br description}}}</div>
+    {{/if}}
   </div>
   <div class="clearfix"></div>
 </script>
@@ -83,10 +85,7 @@
 
 <script id="template-article" type="text/x-handlebars-template">
   <article id="api-{{article.group}}-{{article.name}}-{{article.version}}" {{#if hidden}}class="hide"{{/if}} data-group="{{article.group}}" data-name="{{article.name}}" data-version="{{article.version}}">
-    <div class="pull-left">
-      <h3>{{article.groupTitle}}{{#if article.title}} - {{article.title}}{{/if}}</h3>
-    </div>
-    <div class="clearfix"></div>
+    <h3>{{article.groupTitle}}{{#if article.title}} - {{article.title}}{{/if}}</h3>
 
     {{#if article.deprecated}}
       <p class="deprecated"><span>{{__ "DEPRECATED"}}</span>
@@ -95,7 +94,7 @@
     {{/if}}
 
     {{#if article.description}}
-      <p>{{{nl2br article.description}}}</p>
+      <div class="description">{{{nl2br article.description}}}</div>
     {{/if}}
     <pre class="language-html" data-type="{{toLowerCase article.type}}">
       <code><div class="label label-default">{{toLowerCase article.type}}</div> {{article.url}}</code>
