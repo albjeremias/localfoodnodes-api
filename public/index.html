@@ -14,17 +14,18 @@
 
 <script id="template-sidenav" type="text/x-handlebars-template">
 <nav id="scrollingNav">
-  <div class="sidenav-search">
-    <input class="form-control search" type="text" placeholder="{{__ "Filter..."}}">
-  </div>
   <ul class="sidenav nav nav-list list">
   {{#each nav}}
     {{#if title}}
       {{#if isHeader}}
         {{#if isFixed}}
-          <li class="nav-fixed nav-header navbar-btn nav-list-item" data-group="{{group}}"><a href="#api-{{group}}">{{underscoreToSpace title}}</a></li>
+          <li class="nav-fixed nav-header navbar-btn nav-list-item" data-group="{{group}}">
+            {{underscoreToSpace title}}
+          </li>
         {{else}}
-          <li class="nav-header nav-list-item" data-group="{{group}}"><a href="#api-{{group}}">{{underscoreToSpace title}}</a></li>
+          <li class="nav-header nav-list-item" data-group="{{group}}">
+            {{underscoreToSpace title}}
+          </li>
         {{/if}}
       {{else}}
         <li class="{{#if hidden}}hide {{/if}}" data-group="{{group}}" data-name="{{name}}" data-version="{{version}}">
@@ -62,7 +63,7 @@
 <script id="template-generator" type="text/x-handlebars-template">
   {{#if template.withGenerator}}
     {{#if generator}}
-      <div class="content pull-right">
+      <div class="pull-right">
         {{__ "Generated with"}} {{{generator.name}}} {{{generator.version}}} - {{{generator.time}}}
       </div>
     {{/if}}
@@ -179,14 +180,6 @@
       </table>
     {{/each}}
     {{#if_gt params.examples.length compare=0}}
-      <ul class="nav nav-tabs nav-tabs-examples">
-      {{#each params.examples}}
-        <li{{#if_eq @index compare=0}} class="active"{{/if_eq}}>
-          <a href="#{{../section}}-examples-{{../id}}-{{@index}}">{{title}}</a>
-        </li>
-      {{/each}}
-      </ul>
-
       <div class="tab-content">
       {{#each params.examples}}
         <div class="tab-pane{{#if_eq @index compare=0}} active{{/if_eq}}" id="{{../section}}-examples-{{../id}}-{{@index}}">

@@ -7,7 +7,7 @@ export default {
    */
   count() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -31,7 +31,7 @@ export default {
    */
   countPerDate() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_count_per_date'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count_per_date'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -58,7 +58,7 @@ export default {
    */
   amount(query) {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -93,9 +93,9 @@ export default {
   /**
    * Get order amount per date in euro
    */
-  amountPerDate(query) {
-    return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['orders_amount_per_date'], (error, results, fields) => {
+  amountPerDate(currency) {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_date'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -108,27 +108,57 @@ export default {
           });
         }
 
-        // Todo: loop and convert currency?
-
-        let data = {
-          data: JSON.parse(results[0].data)
-        };
+        results = JSON.parse(results[0].data);
 
         // Convert to currency
-        // if (query.currency) {
-        //   currencyConverter.convert(amount, query.currency)
-        //   .then(amount => {
-        //     return resolve({
-        //       data: amount
-        //     })
-        //   });
-        // } else {
-        //   return resolve({
-        //     data: amount
-        //   });
-        // }
+        if (currency) {
+          // Loop and convert amount for all dates
+          let promises = [];
+          for (const date in results) {
+            if (!results[date] == 0) {
+              let promise = currencyConverter.convert(results[date], currency)
+              .then(amount => {
+                return {
+                  date: date,
+                  amount: amount
+                }
+              });
 
-        return resolve(data);
+              promises.push(promise);
+            } else {
+              promises.push(Promise.resolve({
+                date: date,
+                amount: 0
+              }));
+            }
+          }
+
+          Promise.all(promises)
+          .then((results) => {
+            let obj = {};
+            for (const key in results) {
+              obj[results[key]['date']] = results[key]['amount'];
+            }
+
+            return resolve({
+              data: obj
+            });
+          })
+          .catch(error => {
+              console.error(error)
+          });
+        } else {
+          return resolve({
+            data: results
+          });
+        }
+
+        // let data = {
+        //   data: JSON.parse(results[0].data)
+        // };
+
+
+        // return resolve(data);
       });
     });
   }

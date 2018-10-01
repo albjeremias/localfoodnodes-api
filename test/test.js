@@ -1,19 +1,24 @@
 import 'dotenv/config';
 import assert from 'assert';
 import http from 'http';
+import _ from 'lodash';
 import data from '../public/api_data.json';
 
 describe('Test api routes', function () {
   const apiUrl = process.env.APP_URL + '/v1.0';
-  const numberOfTests = data.length + 2;
+  let routesToTest = [];
+
+  for (const key of Object.keys(data)) {
+    const route = data[key];
+    routesToTest.push(route.url);
+  }
 
   let that = this;
-  that.numberOfRunTests = 0;
+  that.routesTested = [];
 
   it(process.env.APP_URL + '/ should return 302', function (done) {
     http.get(process.env.APP_URL + '/', function (res) {
       assert.equal(302, res.statusCode);
-      that.numberOfRunTests++;
       done();
     });
   });
@@ -21,7 +26,6 @@ describe('Test api routes', function () {
   it(apiUrl + '/ should return 200', function (done) {
     http.get(apiUrl + '/', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
       done();
     });
   });
@@ -33,71 +37,120 @@ describe('Test api routes', function () {
       it(apiUrl + route.url + ' should return 200', function (done) {
         http.get(apiUrl + route.url, function (res) {
           assert.equal(200, res.statusCode);
-          that.numberOfRunTests++;
+          that.routesTested.push(route.url);
           done();
         });
       });
     }
   }
 
-  it(apiUrl + '/nodes/3/amount should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/amount', function (res) {
+  // Node: amount
+  it(apiUrl + '/node/3/amount should return 200', function (done) {
+    http.get(apiUrl + '/node/3/amount', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/node/:nodeId/amount');
       done();
     });
   });
 
-  it(apiUrl + '/nodes/3/orders should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/orders', function (res) {
+  // Node: orders
+  it(apiUrl + '/node/3/orders should return 200', function (done) {
+    http.get(apiUrl + '/node/3/orders', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/node/:nodeId/orders');
       done();
     });
   });
 
-  it(apiUrl + '/nodes/3/members should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/members', function (res) {
+  // Node: members
+  it(apiUrl + '/node/3/members should return 200', function (done) {
+    http.get(apiUrl + '/node/3/members', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/node/:nodeId/members');
       done();
     });
   });
 
-  it(apiUrl + '/nodes/3/customers should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/customers', function (res) {
+  // Node: Customers
+  it(apiUrl + '/node/3/customers should return 200', function (done) {
+    http.get(apiUrl + '/node/3/customers', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/node/:nodeId/customers');
       done();
     });
   });
 
-  it(apiUrl + '/nodes/3/customers should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/customers?date=2018-06-28', function (res) {
+  // Node: products
+  it(apiUrl + '/node/3/products should return 200', function (done) {
+    http.get(apiUrl + '/node/3/products', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/node/:nodeId/products');
       done();
     });
   });
 
-  it(apiUrl + '/nodes/3/producers should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/producers?date=2018-06-28', function (res) {
+  // Node: producers
+  it(apiUrl + '/node/3/producers should return 200', function (done) {
+    http.get(apiUrl + '/node/3/producers', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/node/:nodeId/producers');
       done();
     });
   });
 
-  it(apiUrl + '/nodes/3/products should return 200', function (done) {
-    http.get(apiUrl + '/nodes/3/products?date=2018-06-28', function (res) {
+  // Delivery: customers
+  it(apiUrl + '/delivery/3/2018-06-28/customers should return 200', function (done) {
+    http.get(apiUrl + '/delivery/3/2018-06-28/customers', function (res) {
       assert.equal(200, res.statusCode);
-      that.numberOfRunTests++;
+      that.routesTested.push('/delivery/:nodeId/:date/customers');
+      done();
+    });
+  });
+
+  // Delivery: producers
+  it(apiUrl + '/delivery/3/2018-06-28/producers should return 200', function (done) {
+    http.get(apiUrl + '/delivery/3/2018-06-28/producers', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/delivery/:nodeId/:date/producers');
+      done();
+    });
+  });
+
+  // Delivery: products
+  it(apiUrl + '/delivery/3/2018-06-28/products should return 200', function (done) {
+    http.get(apiUrl + '/delivery/3/2018-06-28/products', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/delivery/:nodeId/:date/products');
+      done();
+    });
+  });
+
+  // Delivery: orders
+  it(apiUrl + '/delivery/3/2018-06-28/orders should return 200', function (done) {
+    http.get(apiUrl + '/delivery/3/2018-06-28/orders', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/delivery/:nodeId/:date/orders');
+      done();
+    });
+  });
+
+  // Delivery: amount
+  it(apiUrl + '/delivery/3/2018-06-28/amount should return 200', function (done) {
+    http.get(apiUrl + '/delivery/3/2018-06-28/amount', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/delivery/:nodeId/:date/amount');
       done();
     });
   });
 
   it('All tests have run', function (done) {
-    assert.ok(numberOfTests <= that.numberOfRunTests);
+    let routesMissingTests = _.difference(routesToTest, that.routesTested);
+
+    if (routesMissingTests.length) {
+      console.error(routesMissingTests);
+    }
+
+    assert.equal(0, routesMissingTests.length);
     done();
   });
 });

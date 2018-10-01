@@ -4,13 +4,13 @@ import orders from './model';
 var router = express.Router();
 
 /**
- * @api {get} /orders/count 3. Number of orders
+ * @api {get} /orders/count Count
  * @apiName Total number of orders
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of orders.
  *
- * @apiSuccess {Array} data Total order product count.
+ * @apiSuccess {Array} data Total order count.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -40,8 +40,8 @@ router.get('/count', (req, res) => {
 });
 
 /**
- * @api {get} /orders/count/date 4. Number of ordersper date
- * @apiName Total number of orders per date
+ * @api {get} /orders/count/date Count per date
+ * @apiName Total number of orders grouped per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of orders grouped per date.
@@ -82,7 +82,44 @@ router.get('/count/date', (req, res) => {
 });
 
 /**
- * @api {get} /orders/amount 1. Order amount
+ * @api {get} /orders/count Product count
+ * @apiName Total number of ordered products
+ * @apiGroup Orders
+ * @apiVersion 1.0.0
+ * @apiDescription Get the total number of ordered products.
+ *
+ * @apiSuccess {Array} data Total number of ordered product.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": "3248"
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/products', (req, res) => {
+  orders.productCount()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+
+/**
+ * @api {get} /orders/amount Amount
  * @apiName Total order amount
  * @apiGroup Orders
  * @apiVersion 1.0.0
@@ -120,13 +157,13 @@ router.get('/amount', (req, res) => {
 });
 
 /**
- * @api {get} /orders/amount/date 2. Order amount per date
- * @apiName Order amount per date
+ * @api {get} /orders/amount/date Amount per date
+ * @apiName Amount per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total order amount grouped by date.
  *
- * @apiSuccess {Array} data Amount in EUR if no other currency is specified, grouped by date.
+ * @apiSuccess {Array} data Total order amount grouped by date
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -151,7 +188,7 @@ router.get('/amount', (req, res) => {
  * }
  */
 router.get('/amount/date', (req, res) => {
-  orders.amountPerDate(req.query)
+  orders.amountPerDate(req.query.currency)
   .then(data => {
     res.send(data);
   })

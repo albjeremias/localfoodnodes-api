@@ -4,8 +4,8 @@ import producers from './model';
 var router = express.Router();
 
 /**
- * @api {get} /producers/count 1. Number of producers
- * @apiName Count
+ * @api {get} /producers/count Count
+ * @apiName Number of producers
  * @apiGroup Producers
  * @apiVersion 1.0.0
  * @apiDescription Get the number of producers registered on localfoodnodes.org.

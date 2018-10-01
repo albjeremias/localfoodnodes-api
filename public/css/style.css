@@ -2,15 +2,14 @@
  * Content
  */
 body {
-  min-width: 980px;
-  max-width: 1280px;
   background-color:#fafafa;
 }
 
 #content {
   padding-top: 15px;
-  margin-left: calc(30vw + 15px);
-  width: calc(70vw - 30px);
+  margin-left: calc(260px + 15px);
+  width: calc(100vw - 260px - 30px);
+  max-width: 800px;
 }
 
 pre {
@@ -26,10 +25,10 @@ pre {
  * Sidenav
  */
 .sidenav {
-  width: 30vw;
+  width: 260px;
   margin: 0;
   position: fixed;
-  top: 60px;
+  top: 0;
   left: 0;
   bottom: 0;
   overflow-x: hidden;
@@ -42,59 +41,38 @@ pre {
   color: #fff;
   display: block;
   margin: 0;
-  padding: 2px 11px;
-  border: 0;
+  padding: 2px 10px;
   border-left: transparent 4px solid;
-  border-right: transparent 4px solid;
   font-weight: 400;
   font-size: 14px;
 }
 
-.sidenav > li > a:hover {
+.sidenav > li > a:hover,
+.sidenav > li > a:focus,
+.sidenav > li > a:active {
   background: transparent;
-  color: #ccc;
-  text-decoration: underline;
-}
-
-.sidenav > li.nav-header {
-  margin-top: 30px;
-}
-
-.sidenav > li.nav-header > a {
-  width: 190px;
-  font-weight: 700;
-  font-size: 16px;
+  border-color: red;
 }
 
 .sidenav > li.active > a {
-    position: relative;
-    z-index: 2;
-    color: #ccc;
-    text-decoration: underline;
+  border-color: red;
 }
 
-.sidenav > li.has-modifications a {
-  border-right: #60d060 4px solid;
+.sidenav > li.nav-header {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 30px 14px 5px;
 }
 
-.sidenav > li.is-new a {
-  border-left: #e5e5e5 4px solid;
-}
-
-/*
- * Side nav search
- */
-.sidenav-search {
-  width: 30vw;
-  left: 0px;
-  position: fixed;
-  padding: 15px;
-  background-color: #333;
-  z-index: 11;
-}
-
-.sidenav-search input {
-  border: 0;
+@media only screen and (max-width: 800px) {
+  .sidenav {
+    display: none;
+  }
+  #content {
+    margin: 0 15px;
+    width: calc(100vw - 30px);
+  }
 }
 
 /*
@@ -114,7 +92,7 @@ article {
   padding-bottom: 6rem;
   padding: 15px;
   border-radius: 3px;
-  box-shadow: 0 0 10px #ccc;
+  box-shadow: 0 0 2px #ccc;
 }
 
 article h3 {
