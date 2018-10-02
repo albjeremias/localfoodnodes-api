@@ -3,6 +3,7 @@
  */
 body {
   background-color:#fafafa;
+  font-family: 'Open Sans';
 }
 
 #content {
@@ -19,6 +20,10 @@ pre {
 .description {
   margin-bottom: 2rem;
   max-width: 600px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat';
 }
 
 /*
@@ -41,25 +46,25 @@ pre {
   color: #fff;
   display: block;
   margin: 0;
-  padding: 2px 10px;
+  padding: 2px 10px 2px 25px;
   border-left: transparent 4px solid;
   font-weight: 400;
-  font-size: 14px;
 }
 
 .sidenav > li > a:hover,
 .sidenav > li > a:focus,
 .sidenav > li > a:active {
   background: transparent;
-  border-color: red;
+  border-color: #ffc80a;
 }
 
 .sidenav > li.active > a {
-  border-color: red;
+  border-color: #ffc80a;
 }
 
 .sidenav > li.nav-header {
   color: #fff;
+  font-family: 'Montserrat';
   font-size: 20px;
   font-weight: bold;
   margin: 30px 14px 5px;

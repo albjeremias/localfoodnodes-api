@@ -4,6 +4,12 @@ import v1_0 from './src/v1.0/router';
 
 const app = express();
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.get('/', (req, res) => {
   res.redirect('/v1.0/'); // Redirect to current version of the API
 });

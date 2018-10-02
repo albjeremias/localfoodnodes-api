@@ -4,8 +4,7 @@ import nodes from './model';
 var router = express.Router();
 
 /**
- * @api {get} /nodes/count Count
- * @apiName Count
+ * @api {get} /nodes/count Get nodes count
  * @apiGroup Nodes
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of nodes registered on localfoodnodes.org.

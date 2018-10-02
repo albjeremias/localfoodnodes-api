@@ -4,8 +4,7 @@ import orders from './model';
 var router = express.Router();
 
 /**
- * @api {get} /orders/count Count
- * @apiName Total number of orders
+ * @api {get} /orders/count Get orders count
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of orders.
@@ -40,13 +39,12 @@ router.get('/count', (req, res) => {
 });
 
 /**
- * @api {get} /orders/count/date Count per date
- * @apiName Total number of orders grouped per date
+ * @api {get} /orders/count/date Get orders count per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of orders grouped per date.
  *
- * @apiSuccess {Array} data Total order product count grouped by date.
+ * @apiSuccess {Array} data Product count grouped by date.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -82,13 +80,12 @@ router.get('/count/date', (req, res) => {
 });
 
 /**
- * @api {get} /orders/count Product count
- * @apiName Total number of ordered products
+ * @api {get} /orders/products Get ordered products count to implement
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of ordered products.
  *
- * @apiSuccess {Array} data Total number of ordered product.
+ * @apiSuccess {Array} data Number of ordered products.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -119,15 +116,14 @@ router.get('/products', (req, res) => {
 
 
 /**
- * @api {get} /orders/amount Amount
- * @apiName Total order amount
+ * @api {get} /orders/amount Get orders amount
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total order amount.
  *
- * @apiParam {String} currency Currency code to convert amount
+ * @apiParam {String} currency Currency code
  *
- * @apiSuccess {Int} data Amount in EUR if no other currency is specified.
+ * @apiSuccess {Int} data Amount in EUR or other currency if specified.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -157,13 +153,12 @@ router.get('/amount', (req, res) => {
 });
 
 /**
- * @api {get} /orders/amount/date Amount per date
- * @apiName Amount per date
+ * @api {get} /orders/amount/date Get orders amount per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the total order amount grouped by date.
  *
- * @apiSuccess {Array} data Total order amount grouped by date
+ * @apiSuccess {Array} data Order amount grouped by date
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK

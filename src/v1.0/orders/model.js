@@ -152,13 +152,6 @@ export default {
             data: results
           });
         }
-
-        // let data = {
-        //   data: JSON.parse(results[0].data)
-        // };
-
-
-        // return resolve(data);
       });
     });
   }

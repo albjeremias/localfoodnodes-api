@@ -5,7 +5,6 @@ var router = express.Router();
 
 /**
  * @api {get} /users/count Count
- * @apiName Number of users
  * @apiGroup Users
  * @apiVersion 1.0.0
  * @apiDescription Get the number of users registered on localfoodnodes.org.

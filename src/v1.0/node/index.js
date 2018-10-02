@@ -4,16 +4,15 @@ import node from './model';
 var router = express.Router({ mergeParams: true });
 
 /**
- * @api {get} /node/:nodeId/amount Total order amount
- * @apiName Total order amount per node
+ * @api {get} /node/:nodeId/amount Get orders amount
  * @apiGroup Node
  * @apiVersion 1.0.0
- * @apiDescription Get the total amount (EUR) for all orders placed on the specified node.
+ * @apiDescription Get the total amount for all orders placed on a node.
  *
  * @apiParam {Int} nodeId The node id
- * @apiParam {String} currency Currency code to convert amount
+ * @apiParam {String} currency Currency code
  *
- * @apiSuccess {Object} data Amount in EUR if no other currency is specified.
+ * @apiSuccess {Object} data Amount in EUR or other specified currency.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -43,11 +42,10 @@ router.get(['/amount'], (req, res) => {
 });
 
 /**
- * @api {get} /node/:nodeId/orders Number or products ordered
- * @apiName Total number orders
+ * @api {get} /node/:nodeId/orders Get ordered products count
  * @apiGroup Node
  * @apiVersion 1.0.0
- * @apiDescription Get the total number of products ordered for the specified node.
+ * @apiDescription Get the total number of products ordered for a node.
  *
  * @apiParam {Int} nodeId The node id
  *
@@ -81,8 +79,7 @@ router.get(['/orders'], (req, res) => {
 });
 
 /**
- * @api {get} /node/:nodeId/members Members
- * @apiName Number of members
+ * @api {get} /node/:nodeId/members Get members count
  * @apiGroup Node
  * @apiVersion 1.0.0
  * @apiDescription Get the number of users that's currently a member of a node.
@@ -119,11 +116,10 @@ router.get(['/members'], (req, res) => {
 });
 
 /**
- * @api {get} /node/:nodeId/customers Customers
- * @apiName Total number of customers
+ * @api {get} /node/:nodeId/customers Get customers count
  * @apiGroup Node
  * @apiVersion 1.0.0
- * @apiDescription Get the total number of ordering customers on the node.
+ * @apiDescription Get the number of ordering customers on a node.
  *
  * @apiParam {Int} nodeId The node id
  * @apiParam {Int} date Date formatted as yyyy-mm-dd.
@@ -158,15 +154,14 @@ router.get(['/customers'], (req, res) => {
 });
 
 /**
- * @api {get} /node/:nodeId/producers Producers
- * @apiName Number of producers
+ * @api {get} /node/:nodeId/producers Get producers count
  * @apiGroup Node
  * @apiVersion 1.0.0
  * @apiDescription Get the number of producers for a node.
  *
  * @apiParam {Int} nodeId The node id
  *
- * @apiSuccess {Object} data Number of producers
+ * @apiSuccess {Object} data Number of producers.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -196,11 +191,10 @@ router.get(['/producers'], (req, res) => {
 });
 
 /**
- * @api {get} /node/:nodeId/products Products
- * @apiName Number of currently available products
+ * @api {get} /node/:nodeId/products Get products count
  * @apiGroup Node
  * @apiVersion 1.0.0
- * @apiDescription Get the number of sold products for a node. If you provide a date you'll get the number of products sold on the specificed date.
+ * @apiDescription Get the number of sold products on a node.
  *
  * @apiParam {Int} nodeId The node id
  * @apiParam {Int} date Date formatted as yyyy-mm-dd.
