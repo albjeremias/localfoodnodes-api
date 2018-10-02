@@ -74,7 +74,7 @@ router.get('/items', (req, res) => {
 });
 
 /**
- * @api {get} /orders/products Get ordered products count to implement
+ * @api {get} /orders/products Get ordered products count
  * @apiGroup Orders
  * @apiVersion 1.0.0
  * @apiDescription Get the number of unique products ordered.
