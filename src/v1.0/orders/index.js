@@ -39,6 +39,76 @@ router.get('/count', (req, res) => {
 });
 
 /**
+ * @api {get} /orders/items Get order items count
+ * @apiGroup Orders
+ * @apiVersion 1.0.0
+ * @apiDescription Get the total number of order items.
+ *
+ * @apiSuccess {Array} data Total order item count.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": "3248"
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/items', (req, res) => {
+  orders.items()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+/**
+ * @api {get} /orders/products Get ordered products count to implement
+ * @apiGroup Orders
+ * @apiVersion 1.0.0
+ * @apiDescription Get the number of unique products ordered.
+ *
+ * @apiSuccess {Array} data Number of unique products ordered.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": "3248"
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/products', (req, res) => {
+  orders.products()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+/**
  * @api {get} /orders/count/date Get orders count per date
  * @apiGroup Orders
  * @apiVersion 1.0.0
@@ -78,42 +148,6 @@ router.get('/count/date', (req, res) => {
     res.status(500).send(error);
   });
 });
-
-/**
- * @api {get} /orders/products Get ordered products count to implement
- * @apiGroup Orders
- * @apiVersion 1.0.0
- * @apiDescription Get the total number of ordered products.
- *
- * @apiSuccess {Array} data Number of ordered products.
- *
- * @apiSuccessExample Success-Response:
- * HTTP/1.1 200 OK
- * {
- *   "data": "3248"
- * }
- *
- * @apiError {Object} error Object containing error message.
- *
- * @apiErrorExample Error-Response:
- * HTTP/1.1 400 Bad Request
- * {
- *   "error": {
- *     message: "A message describing the error."
- *   }
- * }
- */
-router.get('/products', (req, res) => {
-  orders.productCount()
-  .then(data => {
-    res.send(data);
-  })
-  .catch(error => {
-    console.error(error);
-    res.status(500).send(error);
-  });
-});
-
 
 /**
  * @api {get} /orders/amount Get orders amount

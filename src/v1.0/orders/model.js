@@ -3,11 +3,59 @@ import currencyConverter from 'currency-converter';
 
 export default {
   /**
-   * Get total number of orders
+   * Get total number of orders.
    */
   count() {
     return new Promise(function(resolve, reject) {
       db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count'], (error, results, fields) => {
+        if (error) {
+          return reject(db.formatJsonError(error));
+        }
+
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
+        }
+
+        let data = results[0];
+        return resolve(data);
+      });
+    });
+  },
+
+  /**
+   * Get total number of order items.
+   */
+  items() {
+    return new Promise(function(resolve, reject) {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_items_count'], (error, results, fields) => {
+        if (error) {
+          return reject(db.formatJsonError(error));
+        }
+
+        if (!results || results.length < 1) {
+          return reject({
+            error: {
+              message: 'No data.'
+            }
+          });
+        }
+
+        let data = results[0];
+        return resolve(data);
+      });
+    });
+  },
+
+  /**
+   * Get total number of unique products.
+   */
+  products() {
+    return new Promise(function(resolve, reject) {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_unique_items_count'], (error, results, fields) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
