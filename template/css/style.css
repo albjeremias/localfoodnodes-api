@@ -30,15 +30,16 @@ h1, h2, h3, h4, h5, h6 {
  * Sidenav
  */
 .sidenav {
-  width: 260px;
-  margin: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
+  background-color: #333;
   bottom: 0;
+  left: 0;
+  margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #333;
+  padding-bottom: 50px;
+  position: fixed;
+  top: 0;
+  width: 260px;
   z-index: 10;
 }
 
