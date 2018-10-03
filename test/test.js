@@ -152,6 +152,15 @@ describe('Test api routes', function () {
     });
   });
 
+  // Currency: rate
+  it(apiUrl + '/currency/convert/100/SEK should return 200', function (done) {
+    http.get(apiUrl + '/currency/convert/100/SEK', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/currency/convert/:amount/:currencyCode');
+      done();
+    });
+  });
+
   it('All tests have run', function (done) {
     let routesMissingTests = _.difference(routesToTest, that.routesTested);
 

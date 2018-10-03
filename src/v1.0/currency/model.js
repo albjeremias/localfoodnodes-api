@@ -1,5 +1,4 @@
 import db from 'db';
-import _ from 'lodash';
 
 export default {
   /**
