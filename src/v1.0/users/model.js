@@ -52,7 +52,7 @@ export default {
   /**
    * Get average membership amount
    */
-  members() {
+  averageAmount() {
     return new Promise(function(resolve, reject) {
       return resolve({
         data: 160
