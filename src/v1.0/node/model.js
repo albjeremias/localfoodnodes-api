@@ -16,7 +16,7 @@ export default {
         });
       }
 
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_node'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_node'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -108,7 +108,7 @@ export default {
         });
       }
 
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }

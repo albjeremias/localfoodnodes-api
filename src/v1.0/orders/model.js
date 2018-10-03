@@ -7,7 +7,7 @@ export default {
    */
   count() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -31,7 +31,7 @@ export default {
    */
   items() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_items_count'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_items_count'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -55,7 +55,7 @@ export default {
    */
   products() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_unique_items_count'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_unique_items_count'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -79,7 +79,7 @@ export default {
    */
   countPerDate() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count_per_date'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count_per_date'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -106,7 +106,7 @@ export default {
    */
   amount(query) {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -143,7 +143,7 @@ export default {
    */
   amountPerDate(currency) {
     return new Promise((resolve, reject) => {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_date'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_date'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }

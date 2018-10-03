@@ -50,7 +50,7 @@ export default {
         });
       }
 
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }

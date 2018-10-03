@@ -6,7 +6,7 @@ export default {
    */
   count() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['node_count'], (error, results, fields) => {
+      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['node_count'], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }

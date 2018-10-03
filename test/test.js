@@ -143,6 +143,15 @@ describe('Test api routes', function () {
     });
   });
 
+  // Currency: rate
+  it(apiUrl + '/currency/rate/SEK should return 200', function (done) {
+    http.get(apiUrl + '/currency/rate/SEK', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/currency/rate/:currencyCode');
+      done();
+    });
+  });
+
   it('All tests have run', function (done) {
     let routesMissingTests = _.difference(routesToTest, that.routesTested);
 

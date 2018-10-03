@@ -1,12 +1,13 @@
 import db from 'db';
+import _ from 'lodash';
 
 export default {
   /**
-   * Get number of users
+   * Get rates
    */
-  count() {
+  rates() {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_count'], (error, results) => {
+      db.query('SELECT currency, rate FROM currencies', (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -19,18 +20,22 @@ export default {
           });
         }
 
-        let data = results[0];
-        return resolve(data);
+        let data = {}
+        for (let index in results) {
+          data[results[index].currency] = results[index].rate;
+        };
+
+        return resolve({data: data});
       });
     });
   },
 
   /**
-   * Get number of users
+   * Get rate
    */
-  members() {
+  rate(currencyCode) {
     return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_members_count'], (error, results) => {
+      db.query('SELECT currency, rate FROM currencies WHERE currency = ?', [currencyCode], (error, results) => {
         if (error) {
           return reject(db.formatJsonError(error));
         }
@@ -43,8 +48,9 @@ export default {
           });
         }
 
-        let data = results[0];
-        return resolve(data);
+        return resolve({
+          data: results[0].rate
+        });
       });
     });
   },

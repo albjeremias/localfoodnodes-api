@@ -1,5 +1,6 @@
 import express from 'express';
 
+import currency from './currency';
 import delivery from './delivery';
 import node from './node';
 import nodes from './nodes';
@@ -9,6 +10,7 @@ import users from './users';
 
 var router = express.Router();
 
+router.use('/currency', currency);
 router.use('/delivery/:nodeId/:date', delivery);
 router.use('/node/:nodeId', node);
 router.use('/nodes', nodes);
