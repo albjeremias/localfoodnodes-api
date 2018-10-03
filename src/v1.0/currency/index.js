@@ -49,7 +49,9 @@ router.get('/rates', (req, res) => {
  * @api {get} /currency/rate/:currencyCode Currency rate
  * @apiGroup Currency
  * @apiVersion 1.0.0
- * @apiDescription Get specific currency rate compared to EUR
+ * @apiDescription Get specific currency rate. EUR is base currency.
+ *
+ * @apiParam {String} currencyCode Currency code in ISO 4217 format.
  *
  * @apiSuccess {Object} data Currency rate
  *
@@ -81,10 +83,13 @@ router.get('/rate/:currencyCode', (req, res) => {
 });
 
 /**
- * @api {get} /currency/convert/:amount/:currencyCode Currency rate
+ * @api {get} /currency/convert/:amount/:currencyCode Convert amount
  * @apiGroup Currency
  * @apiVersion 1.0.0
  * @apiDescription Convert amount to specified currency
+ *
+ * @apiParam {Int} amount Amount to convert.
+ * @apiParam {String} currencyCode Currency code in ISO 4217 format to convert to.
  *
  * @apiSuccess {Object} data Converted amount.
  *
