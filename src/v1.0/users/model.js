@@ -48,4 +48,15 @@ export default {
       });
     });
   },
+
+  /**
+   * Get average membership amount
+   */
+  members() {
+    return new Promise(function(resolve, reject) {
+      return resolve({
+        data: 160
+      });
+    });
+  },
 }

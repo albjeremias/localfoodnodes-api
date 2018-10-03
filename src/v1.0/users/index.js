@@ -73,5 +73,39 @@ router.get('/members', (req, res) => {
   });
 });
 
+/**
+ * @api {get} /users/members Average membership amount
+ * @apiGroup Users
+ * @apiVersion 1.0.0
+ * @apiDescription Get the average membership amount.
+ *
+ * @apiSuccess {Object} data Amount.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": "2817"
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/amount/average', (req, res) => {
+  users.averageAmount()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
 
 export default router;
