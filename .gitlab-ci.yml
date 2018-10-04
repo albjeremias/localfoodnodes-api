@@ -7,7 +7,6 @@ deploy_staging:
     - live
   script:
     - npm install
-    - sudo npm run create-links
     - npm run docs
     - sudo rsync -azr --delete --exclude .git/ --exclude-from .rsyncignore $CI_PROJECT_DIR $TARGET_DIR
     - sudo chown -R www-data $TARGET_DIR/$CI_PROJECT_NAME
