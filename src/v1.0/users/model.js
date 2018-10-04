@@ -1,62 +1,35 @@
-import db from 'db';
+import db from 'db';;
+import currencyConverter from 'currency-converter';
 
 export default {
   /**
    * Get number of users
    */
   count() {
-    return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_count'], (error, results) => {
-        if (error) {
-          return reject(db.formatJsonError(error));
-        }
-
-        if (!results || results.length < 1) {
-          return reject({
-            error: {
-              message: 'No data.'
-            }
-          });
-        }
-
-        let data = results[0];
-        return resolve(data);
-      });
-    });
+    return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_count']);
   },
 
   /**
    * Get number of users
    */
   members() {
-    return new Promise(function(resolve, reject) {
-      db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_members_count'], (error, results) => {
-        if (error) {
-          return reject(db.formatJsonError(error));
-        }
-
-        if (!results || results.length < 1) {
-          return reject({
-            error: {
-              message: 'No data.'
-            }
-          });
-        }
-
-        let data = results[0];
-        return resolve(data);
-      });
-    });
+    return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_members_count']);
   },
 
   /**
    * Get average membership amount
    */
-  averageAmount() {
-    return new Promise(function(resolve, reject) {
-      return resolve({
-        data: 160
+  averageAmount(currencyCode, filtered) {
+    let key = filtered === undefined ? 'user_average_amount_filtered' : 'user_average_amount';
+
+    return db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key])
+    .then(results => {
+      return currencyConverter.convert(results.data, currencyCode)
+      .then(data => {
+        return {
+          data: data
+        }
       });
-    });
+    })
   },
 }

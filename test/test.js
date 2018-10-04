@@ -161,6 +161,15 @@ describe('Test api routes', function () {
     });
   });
 
+  // User: average amount
+  it(apiUrl + '/users/amount/average/SEK should return 200', function (done) {
+    http.get(apiUrl + '/users/amount/average/SEK', function (res) {
+      assert.equal(200, res.statusCode);
+      that.routesTested.push('/users/amount/average/:currencyCode');
+      done();
+    });
+  });
+
   it('All tests have run', function (done) {
     let routesMissingTests = _.difference(routesToTest, that.routesTested);
 

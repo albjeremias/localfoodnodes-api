@@ -1,4 +1,4 @@
-import db from 'db';
+import db from 'db';;
 
 class CurrencyConverter {
   convert(amount, to, from = 'EUR') {
