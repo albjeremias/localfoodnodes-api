@@ -12,6 +12,18 @@ export default {
   /**
    * Get number of users
    */
+  countPerDate() {
+    return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_count_per_date'])
+    .then(results => {
+      return {
+        data: JSON.parse(results.data)
+      };
+    });
+  },
+
+  /**
+   * Get number of users
+   */
   members() {
     return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['user_members_count']);
   },
