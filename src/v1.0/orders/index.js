@@ -114,7 +114,7 @@ router.get('/products', (req, res) => {
  * @apiVersion 1.0.0
  * @apiDescription Get the total number of orders grouped per date.
  *
- * @apiSuccess {Array} data Product count grouped by date.
+ * @apiSuccess {Array} data Order count grouped per date.
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -140,6 +140,47 @@ router.get('/products', (req, res) => {
  */
 router.get('/count/date', (req, res) => {
   orders.countPerDate()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+/**
+ * @api {get} /orders/count/node Get orders count per node
+ * @apiGroup Orders
+ * @apiVersion 1.0.0
+ * @apiDescription Get the total number of orders per node.
+ *
+ * @apiSuccess {Array} data Order count per node.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": {
+ *     "2017-05-25": 12,
+ *     "2017-05-26": 37,
+ *     "2017-05-27": 16,
+ *     "2017-05-28": 21,
+ *     ...
+ *   }
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/count/node', (req, res) => {
+  orders.countPerNode()
   .then(data => {
     res.send(data);
   })
@@ -218,6 +259,47 @@ router.get('/amount', (req, res) => {
  */
 router.get('/amount/date', (req, res) => {
   orders.amountPerDate(req.query.currency)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+/**
+ * @api {get} /orders/amount/node Get orders amount per node
+ * @apiGroup Orders
+ * @apiVersion 1.0.0
+ * @apiDescription Get the total order amount per node.
+ *
+ * @apiSuccess {Array} data Order amount per node
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": {
+ *     "1": 12,
+ *     "2": 37,
+ *     "3": 16,
+ *     "4": 21,
+ *     ...
+ *   }
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/amount/node', (req, res) => {
+  orders.amountPerNode(req.query.currency)
   .then(data => {
     res.send(data);
   })

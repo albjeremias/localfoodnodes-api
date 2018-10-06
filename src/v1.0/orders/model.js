@@ -36,6 +36,18 @@ export default {
   },
 
   /**
+   * Get order count per node
+   */
+  countPerNode() {
+    return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_count_per_node'])
+    .then(results => {
+      return {
+        data: JSON.parse(results.data)
+      };
+    });
+  },
+
+  /**
    * Get order amount total in euro
    */
   amount(query) {
@@ -64,6 +76,56 @@ export default {
    */
   amountPerDate(currency) {
     return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_date'], true)
+    .then(results => {
+      results = JSON.parse(results[0].data);
+
+      // Convert to currency
+      if (currency) {
+        // Loop and convert amount for all dates
+        let promises = [];
+        for (const date in results) {
+          if (!results[date] == 0) {
+            let promise = currencyConverter.convert(results[date], currency)
+            .then(amount => {
+              return {
+                date: date,
+                amount: amount
+              }
+            });
+
+            promises.push(promise);
+          } else {
+            promises.push(Promise.resolve({
+              date: date,
+              amount: 0
+            }));
+          }
+        }
+
+        return Promise.all(promises)
+        .then((results) => {
+          let obj = {};
+          for (const key in results) {
+            obj[results[key]['date']] = results[key]['amount'];
+          }
+
+          return {
+            data: obj
+          };
+        });
+      } else {
+        return {
+          data: results
+        };
+      }
+    });
+  },
+
+  /**
+   * Get order amount per node in euro
+   */
+  amountPerNode(currency) {
+    return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount_per_node'], true)
     .then(results => {
       results = JSON.parse(results[0].data);
 
