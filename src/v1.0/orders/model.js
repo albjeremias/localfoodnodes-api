@@ -133,30 +133,28 @@ export default {
       if (currency) {
         // Loop and convert amount for all dates
         let promises = [];
-        for (const date in results) {
-          if (!results[date] == 0) {
-            let promise = currencyConverter.convert(results[date], currency)
-            .then(amount => {
-              return {
-                date: date,
-                amount: amount
-              }
-            });
+        for (const nodeId in results) {
+          let promise = currencyConverter.convert(results[nodeId]['amount'], currency)
+          .then(amount => {
+            return {
+              nodeId: nodeId,
+              count: results[nodeId]['count'],
+              amount: amount
+            }
+          });
 
-            promises.push(promise);
-          } else {
-            promises.push(Promise.resolve({
-              date: date,
-              amount: 0
-            }));
-          }
+          promises.push(promise);
         }
 
         return Promise.all(promises)
         .then((results) => {
           let obj = {};
-          for (const key in results) {
-            obj[results[key]['date']] = results[key]['amount'];
+
+          for (const index in results) {
+            obj[results[index]['nodeId']] = {
+              count: results[index]['count'],
+              amount: results[index]['amount'],
+            };
           }
 
           return {
