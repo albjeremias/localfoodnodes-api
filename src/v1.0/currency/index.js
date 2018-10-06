@@ -8,9 +8,9 @@ var router = express.Router();
  * @api {get} /currency/rates Currency rates
  * @apiGroup Currency
  * @apiVersion 1.0.0
- * @apiDescription Get all currencies and rates
+ * @apiDescription Get all currency rates
  *
- * @apiSuccess {Object} data List of all currency rates
+ * @apiSuccess {Object} data Currency rates
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -36,6 +36,47 @@ var router = express.Router();
  */
 router.get('/rates', (req, res) => {
   currency.rates()
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(500).send(error);
+  });
+});
+
+/**
+ * @api {get} /currency/labels Currency labels
+ * @apiGroup Currency
+ * @apiVersion 1.0.0
+ * @apiDescription Get all currency labels
+ *
+ * @apiSuccess {Object} data Currency labels
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data": {
+ *     "AED": "United Arab Emirates Dirham",
+ *     "AFN": "Afghan Afghani",
+ *     "ALL": "Albanian Lek",
+ *     "AMD": "Armenian Dram",
+ *     ...
+ *   }
+ * }
+ *
+ * @apiError {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/labels', (req, res) => {
+  currency.labels()
   .then(data => {
     res.send(data);
   })
