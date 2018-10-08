@@ -217,7 +217,7 @@ router.get('/count/node', (req, res) => {
  * }
  */
 router.get('/amount', (req, res) => {
-  orders.amount(req.query)
+  orders.amount(req.query.currency)
   .then(data => {
     res.send(data);
   })

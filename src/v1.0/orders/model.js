@@ -50,14 +50,14 @@ export default {
   /**
    * Get order amount total in euro
    */
-  amount(query) {
+  amount(currency) {
     return db.query('SELECT data FROM statistics WHERE statistics.key = ?', ['order_amount'], true)
     .then(results => {
       let amount = results[0].data;
 
       // Convert to currency
-      if (query.currency) {
-        currencyConverter.convert(amount, query.currency)
+      if (currency) {
+        return currencyConverter.convert(amount, currency)
         .then(amount => {
           return {
             data: amount
