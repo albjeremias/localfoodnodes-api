@@ -109,7 +109,7 @@ router.get('/members', (req, res) => {
 });
 
 /**
- * @api {get} /users/amount/average/:currencyCode Average membership amount
+ * @api {get} /users/amount/average Average membership amount
  * @apiGroup Users
  * @apiVersion 1.0.0
  * @apiDescription Get the average membership amount.
@@ -135,8 +135,8 @@ router.get('/members', (req, res) => {
  *   }
  * }
  */
-router.get('/amount/average/:currencyCode', (req, res) => {
-  users.averageAmount(req.params.currencyCode, req.query.filtered)
+router.get('/amount/average', (req, res) => {
+  users.averageAmount(req.query.currency, req.query.filtered)
   .then(data => {
     res.send(data);
   })
