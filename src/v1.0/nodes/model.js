@@ -28,7 +28,7 @@ export default {
   },
 
   /**
-   * Get node names
+   * Get node(s) data
    */
   data(id = null) {
     let query = 'SELECT * FROM nodes_generated';
@@ -39,6 +39,10 @@ export default {
 
     return db.query(query)
     .then(results => {
+      for (let index in results.data) {
+        results.data[index].data = JSON.parse(results.data[index].data);
+      }
+
       return {
         data: results.data
       }
