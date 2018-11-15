@@ -87,12 +87,12 @@ router.get('/labels', (req, res) => {
 });
 
 /**
- * @api {get} /currency/rate/:currencyCode Currency rate
+ * @api {get} /currency/rate/:currency Currency rate
  * @apiGroup Currency
  * @apiVersion 1.0.0
  * @apiDescription Get specific currency rate. EUR is base currency.
  *
- * @apiParam {String} currencyCode Currency code in ISO 4217 format.
+ * @apiParam {String} currency Currency code in ISO 4217 format.
  *
  * @apiSuccess {Object} data Currency rate
  *
@@ -112,8 +112,8 @@ router.get('/labels', (req, res) => {
  *   }
  * }
  */
-router.get('/rate/:currencyCode', (req, res) => {
-  currency.rate(req.params.currencyCode)
+router.get('/rate/:currency', (req, res) => {
+  currency.rate(req.params.currency)
   .then(data => {
     res.send(data);
   })
@@ -124,13 +124,13 @@ router.get('/rate/:currencyCode', (req, res) => {
 });
 
 /**
- * @api {get} /currency/convert/:amount/:currencyCode Convert amount
+ * @api {get} /currency/convert/:amount/:currency Convert amount
  * @apiGroup Currency
  * @apiVersion 1.0.0
  * @apiDescription Convert amount to specified currency
  *
  * @apiParam {Int} amount Amount to convert.
- * @apiParam {String} currencyCode Currency code in ISO 4217 format to convert to.
+ * @apiParam {String} currency Currency code in ISO 4217 format to convert to.
  *
  * @apiSuccess {Object} data Converted amount.
  *
@@ -150,8 +150,8 @@ router.get('/rate/:currencyCode', (req, res) => {
  *   }
  * }
  */
-router.get('/convert/:amount/:currencyCode', (req, res) => {
-  currencyConverter.convert(req.params.amount, req.params.currencyCode)
+router.get('/convert/:amount/:currency', (req, res) => {
+  currencyConverter.convert(req.params.amount, req.params.currency)
   .then(convertedAmount => {
     res.send({
       data: convertedAmount

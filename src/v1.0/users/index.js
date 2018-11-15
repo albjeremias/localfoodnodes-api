@@ -114,7 +114,7 @@ router.get('/members', (req, res) => {
  * @apiVersion 1.0.0
  * @apiDescription Get the average membership amount.
  *
- * @apiParam {String} currencyCode Currency code in ISO 4217 format to convert to.
+ * @apiParam {String} currency Currency code in ISO 4217 format to convert to.
  * @apiParam {String} filtered Exclude all membership payments below minimum charge.
  *
  * @apiSuccess {Object} data Amount.

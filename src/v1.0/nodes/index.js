@@ -77,4 +77,40 @@ router.get('/count', (req, res) => {
   });
 });
 
+/**
+ * @api {get} /nodes/data Get nodes data
+ * @apiGroup Nodes
+ * @apiVersion 1.0.0
+ * @apiDescription Get the public data for nodes registered on localfoodnodes.org.
+ *
+ * @apiParam {String} id Node ID.
+ *
+ * @apiSuccess {Object} data Data.
+ *
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "data":
+ * }
+ *
+ * @apiError (Error 500) {Object} error Object containing error message.
+ *
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ *     message: "A message describing the error."
+ *   }
+ * }
+ */
+router.get('/data', (req, res) => {
+  nodes.data(req.query.id)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  });
+});
+
 export default router;

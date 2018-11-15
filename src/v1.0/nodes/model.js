@@ -26,4 +26,22 @@ export default {
       }
     });
   },
+
+  /**
+   * Get node names
+   */
+  data(id = null) {
+    let query = 'SELECT * FROM nodes_generated';
+
+    if (id) {
+      query += ' where node_id = ' + id;
+    }
+
+    return db.query(query)
+    .then(results => {
+      return {
+        data: results.data
+      }
+    });
+  },
 }

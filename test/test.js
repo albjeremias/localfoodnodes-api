@@ -147,7 +147,7 @@ describe('Test api routes', function () {
   it(apiUrl + '/currency/rate/SEK should return 200', function (done) {
     http.get(apiUrl + '/currency/rate/SEK', function (res) {
       assert.equal(200, res.statusCode);
-      that.routesTested.push('/currency/rate/:currencyCode');
+      that.routesTested.push('/currency/rate/:currency');
       done();
     });
   });
@@ -156,16 +156,16 @@ describe('Test api routes', function () {
   it(apiUrl + '/currency/convert/100/SEK should return 200', function (done) {
     http.get(apiUrl + '/currency/convert/100/SEK', function (res) {
       assert.equal(200, res.statusCode);
-      that.routesTested.push('/currency/convert/:amount/:currencyCode');
+      that.routesTested.push('/currency/convert/:amount/:currency');
       done();
     });
   });
 
   // User: average amount
-  it(apiUrl + '/users/amount/average/SEK should return 200', function (done) {
-    http.get(apiUrl + '/users/amount/average/SEK', function (res) {
+  it(apiUrl + '/users/amount/average?currency=SEK should return 200', function (done) {
+    http.get(apiUrl + '/users/amount/average?currency=SEK', function (res) {
       assert.equal(200, res.statusCode);
-      that.routesTested.push('/users/amount/average/:currencyCode');
+      that.routesTested.push('/users/amount/average?currency=SEK');
       done();
     });
   });

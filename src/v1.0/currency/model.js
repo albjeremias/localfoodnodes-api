@@ -38,8 +38,8 @@ export default {
   /**
    * Get rate
    */
-  rate(currencyCode) {
-    return db.query('SELECT currency, rate FROM currencies WHERE currency = ?', [currencyCode])
+  rate(currency) {
+    return db.query('SELECT currency, rate FROM currencies WHERE currency = ?', [currency])
     .then(results => {
       return {
         data: results.rate

@@ -31,12 +31,12 @@ export default {
   /**
    * Get average membership amount
    */
-  averageAmount(currencyCode, filtered) {
+  averageAmount(currency, filtered) {
     let key = filtered === undefined ? 'user_average_amount_filtered' : 'user_average_amount';
 
     return db.query('SELECT data FROM statistics WHERE statistics.key = ?', [key])
     .then(results => {
-      return currencyConverter.convert(results.data, currencyCode)
+      return currencyConverter.convert(results.data, currency)
       .then(data => {
         return {
           data: data
