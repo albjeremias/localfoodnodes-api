@@ -4,8 +4,16 @@ export default {
   /**
    * Get rates
    */
-  rates() {
-    return db.query('SELECT currency, rate FROM currencies')
+  rates(enabled) {
+    let query = 'SELECT currency, rate FROM currencies';
+
+    if (enabled) {
+      query += ' WHERE enabled = 1';
+    }
+
+    console.log(query);
+
+    return db.query(query)
     .then(results => {
       let formattedData = {}
       for (let index in results.data) {
@@ -21,8 +29,14 @@ export default {
   /**
    * Get labels
    */
-  labels() {
-    return db.query('SELECT currency, label FROM currencies')
+  labels(enabled) {
+    let query = 'SELECT currency, label FROM currencies';
+
+    if (enabled) {
+      query += ' WHERE enabled = 1';
+    }
+
+    return db.query(query)
     .then(results => {
       let formattedData = {}
       for (let index in results.data) {

@@ -10,6 +10,8 @@ var router = express.Router();
  * @apiVersion 1.0.0
  * @apiDescription Get all currency rates
  *
+ * @apiParam {String} enabled Only get currency rates supported by the platform.
+ *
  * @apiSuccess {Object} data Currency rates
  *
  * @apiSuccessExample Success-Response:
@@ -35,7 +37,7 @@ var router = express.Router();
  * }
  */
 router.get('/rates', (req, res) => {
-  currency.rates()
+  currency.rates(req.query.enabled)
   .then(data => {
     res.send(data);
   })
@@ -50,6 +52,8 @@ router.get('/rates', (req, res) => {
  * @apiGroup Currency
  * @apiVersion 1.0.0
  * @apiDescription Get all currency labels
+ *
+ * @apiParam {String} enabled Only get currency labels supported by the platform.
  *
  * @apiSuccess {Object} data Currency labels
  *
@@ -76,7 +80,7 @@ router.get('/rates', (req, res) => {
  * }
  */
 router.get('/labels', (req, res) => {
-  currency.labels()
+  currency.labels(req.query.enabled)
   .then(data => {
     res.send(data);
   })
